@@ -2,8 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\API\StudentController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,16 +15,16 @@ use App\Http\Controllers\API\StudentController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::post( "login", [ AuthController::class, "signin" ]);
-Route::post( "register", [ AuthController::class, "signup" ]);
-Route::get( "students", [ StudentController::class, "index" ]);
-Route::post( "students", [ StudentController::class, "store" ]);
-Route::get( "students/{student}", [ StudentControoler::class, "show" ]);
-Route::put( "students/{student}", [ StudentController::class, "update" ]);
-Route::delete( "students/{student}", [ StudentController::class, "destroy" ]);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group([ "middleware" => [ "auth:sanctum" ]], function () {
+    Route::post( "/students", [ StudentController::class, "store" ]);
+    Route::put( "/students/{id}", [ StudentController::class, "update" ]);
+    Route::delete( "/students/{id}", [ StudentController::class, "destroy" ]);
 });
 
-
+Route::post( "/register", [ AuthController::class, "register" ]);
+Route::post( "/login", [ AuthController::class, "login" ]);
+Route::post( "/logout", [ AuthController::class, "logout" ]);
+Route::get( "/students", [ StudentController::class, "index" ]);
+Route::get( "/students/{id}", [ StudentController::class, "show" ]);
+Route::get( "/students/search/{name}", [ StudentController::class, "search" ]);

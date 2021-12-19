@@ -6,7 +6,7 @@ INSERT INTO classgroups ( classgroup ) VALUES
 ( "3a" ),
 ( "3b" );
 
-INSERT INTO students ( name, email, phone, borndate, groupid ) VALUES
+INSERT INTO students ( name, email, phone, borndate, classgroupid ) VALUES
 ( "Fá Zoltán", "fa@zoltan.hu", "123687625", "1999-12-04", 2 ),
 ( "Negye Dóra", "negye@dora.hu", "123598625", "1998-01-25", 4 ),
 ( "Kukor Ica", "kukor@ica.hu", "479356214", "2000-05-11", 5 ),
