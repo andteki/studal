@@ -1,0 +1,12 @@
+.card {
+    border: none;
+    width: 300px;
+    margin: 0 auto;
+    color: white;
+    padding: 30px;
+    background: rgb(41, 82, 112);
+    background: -webkit-linear-gradient(bottom, 
+        rgb(50, 91, 121) 20%,
+        rgb(72, 56, 104) 80%);    
+
+}

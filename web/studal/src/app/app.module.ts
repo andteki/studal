@@ -9,6 +9,7 @@ import { NopageComponent } from './nopage/nopage.component';
 import { InstituteComponent } from './institute/institute.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
     StudentComponent,
     ClassComponent,
     NopageComponent,
-    InstituteComponent
+    InstituteComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
