@@ -41,14 +41,15 @@ export class StudentComponent implements OnInit {
     this.api.addStudent(this.studentModelObj)
     .subscribe( res => {
       console.log(res);
-      alert('Tanuló hozzáadva');
-      
+      alert('Tanuló hozzáadva');        
       this.studentForm.reset();
+      this.getAllStudent();
     },
       err => {
         alert('Hiba! A tanuló hozzáadása sikertelen!');
       }
     )
+    
   }
   getAllStudent() {
     this.api.getStudents()

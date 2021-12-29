@@ -12,7 +12,10 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   addStudent(data: any) {
-    let token = 'RybbulohxQhKuLGg7gTfn4G54dz5hpsjU0e0oPmh';
+    let dataStore:any = localStorage.getItem('currentUser');
+    let currentUser = JSON.parse(dataStore);
+    let token = currentUser.token;     
+
     let headerObj = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token
@@ -36,7 +39,9 @@ export class ApiService {
     }))
   }
   deleteStudent(id: number) {
-    let token = 'RybbulohxQhKuLGg7gTfn4G54dz5hpsjU0e0oPmh';
+    let data:any = localStorage.getItem('currentUser');
+    let currentUser = JSON.parse(data);
+    let token = currentUser.token;    
     let headerObj = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token
@@ -52,7 +57,10 @@ export class ApiService {
     }))
   }
   updateStudent(student: any, id: number) {
-    let token = 'RybbulohxQhKuLGg7gTfn4G54dz5hpsjU0e0oPmh';
+    let data:any = localStorage.getItem('currentUser');
+    let currentUser = JSON.parse(data);
+    let token = currentUser.token;    
+
     let headerObj = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token
