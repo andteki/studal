@@ -1,1 +1,101 @@
-<p>student works!</p>
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <h1>Tanulók</h1>
+      <div class="d-flex">
+        <button class="btn btn-success" 
+        (click)="clickAddStudent()"
+        data-bs-toggle="modal" 
+        data-bs-target="#exampleModal">Hozzáadás</button>
+      </div>
+    </div>
+</nav>
+  
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Az</th>
+            <th>Név</th>
+            <th>E-mail</th>
+            <th>Telefon</th>
+            <th>Születés</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let student of studentsData">
+            <td>{{student.id}}</td>
+            <td>{{student.name}}</td>
+            <td>{{student.email}}</td>
+            <td>{{student.phone}}</td>
+            <td>{{student.borndate}}</td>
+            <td>
+                <button 
+                type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                (click)="onEdit(student)"
+                class="btn btn-info mr-2">Edit</button>
+
+                <button 
+                (click)="deleteStudent(student.id)"
+                class="btn btn-danger max-3">Delete</button>
+            </td>            
+        </tr>
+    </tbody>
+</table>
+
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Tanuló hozzáadása</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+        </div>
+        <div class="modal-body">
+
+
+            <form [formGroup]="studentForm">
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Név</label>
+                  <input type="text" class="form-control" id="exampleInputPassword1"
+                  formControlName="name">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">E-mailcím</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    formControlName="email">
+                    
+                  </div>                
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Telefon</label>
+                  <input type="text" class="form-control" id="exampleInputPassword1"
+                  formControlName="phone">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Születés</label>
+                  <input type="text" class="form-control" id="exampleInputPassword1"
+                  formControlName="borndate">
+                </div>
+
+              </form>            
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" 
+            *ngIf="showAdd"
+            data-bs-dismiss="modal" (click)="addStudent()"
+            id="addButton">Hozzáadás</button>
+          <button type="button" class="btn btn-primary" 
+            *ngIf="showUpdate"
+            data-bs-dismiss="modal" (click)="updateStudent()"
+            id="addButton">Módosítás</button>
+
+
+        </div>
+      </div>
+    </div>
+  </div>

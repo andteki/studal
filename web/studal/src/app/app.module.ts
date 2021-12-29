@@ -7,6 +7,8 @@ import { StudentComponent } from './student/student.component';
 import { ClassComponent } from './class/class.component';
 import { NopageComponent } from './nopage/nopage.component';
 import { InstituteComponent } from './institute/institute.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { InstituteComponent } from './institute/institute.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
