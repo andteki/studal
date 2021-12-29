@@ -1,18 +1,19 @@
+#from controllers.mainController import MainController
 from views.mainForm import MainForm
 import wx
 import sys
 
-class ViewController:
+class ViewController():
 
     def __init__( self ):
 
         self.mainFrm = MainForm( None, wx.ID_ANY, "" )
         self.mainFrm.SetTitle( "Studal" )
         self.mainFrm.Show()
-        self.eventHandlers()
+        self.setEventHandlers()
         self.setComboBoxItems()
 
-    def eventHandlers( self ):
+    def setEventHandlers( self ):
         
         self.mainFrm.searchBtn.Bind( wx.EVT_BUTTON, self.getSearchStudent )
         self.mainFrm.fillStudentsBtn.Bind( wx.EVT_BUTTON, self.getStudents )
@@ -27,23 +28,37 @@ class ViewController:
         comboItems = [ "Szoftver", "Ifra", "Logisztika", "Vám" ]
         self.mainFrm.groupCb.SetItems( comboItems )
         self.mainFrm.groupCb.SetValue( "Csoportok" )
-    def getStudents( self ):
-        pass
 
-    def getSearchStudent( self ):
-        pass
 
-    def setNewStudent( self ):
-        pass
+    def getStudents( self, event ):
+        # super().getAllStudent()
+        self.mainFrm.statusLbl.SetLabel( "Diákok gomb" )
 
-    def modifyStudent( self ):
-        pass
 
-    def setNewGroup( self ):
-        pass
+    def getSearchStudent( self, event ):
+        
+        self.mainFrm.statusLbl.SetLabel( "Keresés gomb" )
 
-    def modifyGroup( self ):
-        pass
 
-    def closeApplication( self ):
+    def setNewStudent( self, event ):
+        
+        self.mainFrm.statusLbl.SetLabel( "Új diák gomb" )
+
+
+    def modifyStudent( self, event ):
+        
+        self.mainFrm.statusLbl.SetLabel( "Diákok szerkesztése gomb" )
+
+
+    def setNewGroup( self, event ):
+        
+        self.mainFrm.statusLbl.SetLabel( "Új csoport gomb" )
+
+
+    def modifyGroup( self, event ):
+        
+        self.mainFrm.statusLbl.SetLabel( "Csoportok szerkesztése gomb" )
+        
+
+    def closeApplication( self, event ):
         sys.exit()

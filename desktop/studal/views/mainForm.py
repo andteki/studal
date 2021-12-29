@@ -109,9 +109,9 @@ class MainForm(wx.Frame):
 
         sizer_4.Add((20, 10), 0, wx.EXPAND, 0)
 
-        statusLbl = wx.StaticText(self.panel_1, wx.ID_ANY, "Status label", style=wx.ALIGN_CENTER_HORIZONTAL)
-        statusLbl.SetMinSize((150, 35))
-        sizer_2.Add(statusLbl, 0, wx.ALIGN_CENTER_HORIZONTAL, 0)
+        self.statusLbl = wx.StaticText(self.panel_1, wx.ID_ANY, "Status label", style=wx.ALIGN_CENTER_HORIZONTAL)
+        self.statusLbl.SetMinSize((150, 35))
+        sizer_2.Add(self.statusLbl, 0, wx.ALIGN_CENTER_HORIZONTAL| wx.TOP, 10 )
 
         self.panel_1.SetSizer(sizer_1)
 
