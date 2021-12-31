@@ -1,5 +1,5 @@
 
-var host = 'http://localhost:8000/api/';
+var host = 'http://192.168.5.5:8000/api/';
 
 export function getStudents() {
     let endpoint = 'students';

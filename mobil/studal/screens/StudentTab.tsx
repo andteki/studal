@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet, TouchableHighlight } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
@@ -8,33 +8,48 @@ import { useEffect, useState } from 'react';
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
   const [students, setStudents] = useState([]);
-  
-  useEffect(()=> {
+
+  const getStuds = () => {
     let prom = getStudents();    
     prom.then(res => {
         setStudents(res)
-        console.log(res)
     })
+  }
+
+  useEffect(()=> {
+    getStuds();
   }, [])
-  
+
+  const onGetButton = () => {
+    getStuds();
+  }
   
   return (
     
     <View style={styles.container}>
      
       <Text style={styles.title}>Tanulók</Text>
+      <TouchableHighlight
+        style={styles.getButton}
+        onPress={onGetButton}
+      >
+        <Text style={styles.getButtonText}>Tölt</Text>
+      </TouchableHighlight>
+
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 
-      <FlatList 
-      data={students}
-      renderItem={ ({item})=>(
-        <Text>{item.name}</Text>
-      )}
-      />
+      <View style={styles.studList}>
+        <FlatList 
+        data={students}
+        renderItem={ ({item})=>(
+          <Text style={styles.item}>{item.name}</Text>
+        )}
+        />
+      </View>
 
 
       
-      <EditScreenInfo path="/screens/TabOneScreen.tsx" />
+     
     </View>
   );
 }
@@ -55,4 +70,28 @@ const styles = StyleSheet.create({
     height: 1,
     width: '80%',
   },
+  item: {
+    backgroundColor: 'navy',
+    color: 'white',
+    padding: 10,
+    margin: 8 ,
+  },
+  studList: {
+    flex: 1,
+    width: '100%',
+    flexDirection: 'column',
+    backgroundColor: 'orange',
+  },
+  getButton: {
+    backgroundColor: 'blue',
+    marginTop: 10,
+    padding: 10,
+    borderRadius: 3,
+  },
+  getButtonText: {
+    color: 'white',
+    paddingLeft: 10,
+    paddingRight: 10,
+    fontSize: 22,
+  }  
 });
