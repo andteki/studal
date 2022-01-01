@@ -76,8 +76,8 @@ class StudentForm(wx.Frame):
         label_5 = wx.StaticText(self.panel_1, wx.ID_ANY, "")
         sizer_9.Add(label_5, 1, 0, 0)
 
-        self.combo_box_1 = wx.ComboBox(self.panel_1, wx.ID_ANY, choices=[], style=wx.CB_DROPDOWN)
-        sizer_9.Add(self.combo_box_1, 2, wx.BOTTOM | wx.RIGHT | wx.TOP, 10)
+        self.groupCb = wx.ComboBox(self.panel_1, wx.ID_ANY, choices=[], style=wx.CB_DROPDOWN)
+        sizer_9.Add(self.groupCb, 2, wx.BOTTOM | wx.RIGHT | wx.TOP, 10)
 
         sizer_8 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_1.Add(sizer_8, 1, wx.EXPAND, 0)

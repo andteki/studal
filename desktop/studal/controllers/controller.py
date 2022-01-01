@@ -8,7 +8,7 @@ import sys
 class Controller():
 
     def __init__( self ):
-        print("controller")
+        
         self.model = Model()
         self.mainFrm = MainForm( None, wx.ID_ANY, "" )
         self.studentFrm = StudentForm( None, wx.ID_ANY, "" )
@@ -17,13 +17,14 @@ class Controller():
         self.mainFrm.Show()
         self.setEventHandlers()
         self.setComboBoxItems()
+        
 
     def setEventHandlers( self ):
         
         self.mainFrm.searchBtn.Bind( wx.EVT_BUTTON, self.getSearchStudent )
         self.mainFrm.fillStudentsBtn.Bind( wx.EVT_BUTTON, self.getStudents )
-        self.mainFrm.manageStudentsBtn.Bind( wx.EVT_BUTTON, self.manageStudents )
-        self.mainFrm.manageGroupBtn.Bind( wx.EVT_BUTTON, self.manageGroups )
+        self.mainFrm.manageStudentsBtn.Bind( wx.EVT_BUTTON, self.setManageStudentsForm )
+        self.mainFrm.manageGroupBtn.Bind( wx.EVT_BUTTON, self.setManageGroupsForm )
         self.mainFrm.exitBtn.Bind( wx.EVT_BUTTON, self.closeApplication )
 
         # self.studentFrm.addStudentBtn.Bind( wx.EVT_BUTTON, self.addStudent )
@@ -36,41 +37,71 @@ class Controller():
         # self.groupFrm.addGroupBtn.Bind( wx.EVT_BUTTON, self.addGroup )
         # self.groupFrm.exitBtn.Bind( wx.EVT_BUTTON, self.disposeGroupForm )
 
-    def setComboBoxItems( self ):
 
-        comboItems = [ "Szoftver", "Ifra", "Logisztika", "Vám" ]
-        self.mainFrm.groupCb.SetItems( comboItems )
-        self.mainFrm.groupCb.SetValue( "Csoportok" )
 
 # ====================== start section mainform ============================ #
 
+    def setComboBoxItems( self ):
+
+        comboItems = self.model.getComboItems()
+        self.mainFrm.groupCb.SetItems( comboItems )
+        self.mainFrm.groupCb.SetValue( "Csoportok" )
+
+    def setTableProperties( self ):
+
+        columnNames = self.model.getTableCoulumnNames()
+        for i in range( 0, len( columnNames )):
+            
+            self.mainFrm.studentTbl.SetColLabelValue( i, columnNames[ i ])
+            
+
+        width, heigth = self.mainFrm.studentTbl.GetSize()
+        self.mainFrm.studentTbl.SetColSize( 0, ( width/4 ))
+        self.mainFrm.studentTbl.SetColSize( 1, ( width/4 ))
+        self.mainFrm.studentTbl.SetColSize( 2, ( width/6 ))
+        self.mainFrm.studentTbl.SetColSize( 3, ( width/5 ))
+
+
     def getStudents( self, event ):
         
-        self.mainFrm.statusLbl.SetLabel( "Diákok gomb" )
+        self.setTableProperties()
+        students = self.model.getAllStudentsData()
+        for i in range ( 0, len( students )):
+            j = 0
+            if( i > j ):
+                self.mainFrm.studentTbl.AppendRows()
+            for data in students[ i ]:
+                self.mainFrm.studentTbl.SetCellValue( i, j, data )
+                j += 1
 
 
+    
     def getSearchStudent( self, event ):
         
         self.mainFrm.statusLbl.SetLabel( "Keresés gomb" )
-
-
-    def manageStudents( self, event ):
-        
-        self.studentFrm.Show()
-
-
-    def manageGroups( self, event ):
-        
-        self.groupFrm.Show()
-
 
 # ========================= end section mainform ============================== #
 
 # ========================= start section studentform ========================= #
 
+    def setManageStudentsForm( self, event ):
+        
+        comboItems = self.model.getComboItems()
+        self.studentFrm.groupCb.SetItems( comboItems )
+        self.studentFrm.groupCb.SetValue( "Csoportok" )
+        self.studentFrm.Show()
+
+
 # ========================= end section studentform =========================== #
 
 # ========================= start section groupform =========================== #
+    
+    def setManageGroupsForm( self, event ):
+        
+        comboItems = self.model.getComboItems()
+        self.groupFrm.groupCb.SetItems( comboItems )
+        self.groupFrm.groupCb.SetValue( "Csoportok" )
+        self.groupFrm.Show()
 
 # ========================= end section groupform ============================= #
 

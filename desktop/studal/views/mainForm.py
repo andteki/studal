@@ -36,9 +36,9 @@ class MainForm(wx.Frame):
         sizer_3 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_2.Add(sizer_3, 3, wx.EXPAND, 0)
 
-        self.grid_1 = wx.grid.Grid(self.panel_1, wx.ID_ANY, size=(1, 1))
-        self.grid_1.CreateGrid(10, 0)
-        sizer_3.Add(self.grid_1, 3, wx.EXPAND | wx.TOP, 10)
+        self.studentTbl = wx.grid.Grid(self.panel_1, wx.ID_ANY, size=(1, 1))
+        self.studentTbl.CreateGrid( 1, 4 )
+        sizer_3.Add(self.studentTbl, 3, wx.EXPAND | wx.TOP, 10)
 
         sizer_4 = wx.BoxSizer(wx.VERTICAL)
         sizer_3.Add(sizer_4, 1, wx.EXPAND, 0)
