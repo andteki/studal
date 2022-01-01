@@ -1,4 +1,5 @@
 from views.mainForm import MainForm
+from model.studalModel import Model
 import wx
 import sys
 
@@ -6,6 +7,7 @@ class Controller():
 
     def __init__( self ):
 
+        self.model = Model()
         self.mainFrm = MainForm( None, wx.ID_ANY, "" )
         self.mainFrm.SetTitle( "Studal" )
         self.mainFrm.Centre( direction = wx.BOTH )
