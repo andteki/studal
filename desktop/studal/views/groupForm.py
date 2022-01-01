@@ -44,8 +44,8 @@ class GroupForm(wx.Frame):
         self.groupTf.SetMinSize((150, 35))
         sizer_4.Add(self.groupTf, 2, wx.ALIGN_CENTER_VERTICAL | wx.LEFT, 10)
 
-        self.button_1 = wx.Button(self.panel_1, wx.ID_ANY, u"Mentés")
-        sizer_4.Add(self.button_1, 1, wx.ALIGN_CENTER_VERTICAL | wx.LEFT | wx.RIGHT, 10)
+        self.addGroupBtn = wx.Button(self.panel_1, wx.ID_ANY, u"Mentés")
+        sizer_4.Add(self.addGroupBtn, 1, wx.ALIGN_CENTER_VERTICAL | wx.LEFT | wx.RIGHT, 10)
 
         sizer_5 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_2.Add(sizer_5, 1, wx.EXPAND, 0)
