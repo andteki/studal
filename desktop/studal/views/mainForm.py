@@ -65,6 +65,12 @@ class MainForm(wx.Frame):
         self.fillStudentsBtn.SetMinSize((110, 35))
         sizer_9.Add(self.fillStudentsBtn, 0, wx.LEFT | wx.RIGHT | wx.TOP, 10)
 
+        sizer_7 = wx.BoxSizer( wx.VERTICAL )
+        sizer_4.Add( sizer_7, 1, wx.EXPAND, 0 )
+        self.loginLogoutBtn = wx.Button( self.panel_1, wx.ID_ANY, "Bejelentkezés" )
+        #self.loginLogoutBtn.SetSize(( 110, 35 )), 
+        sizer_7.Add( self.loginLogoutBtn, 0, wx.ALIGN_CENTER | wx.TOP, 10 )
+
         sizer_5 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_4.Add(sizer_5, 1, wx.EXPAND, 0)
 
@@ -84,7 +90,6 @@ class MainForm(wx.Frame):
         sizer_4.Add(self.exitBtn, 0, wx.ALIGN_RIGHT | wx.RIGHT, 10)
 
         self.statusLbl = wx.StaticText(self.panel_1, wx.ID_ANY, "Status label", style=wx.ALIGN_CENTER_HORIZONTAL)
-        self.statusLbl.SetMinSize((150, 35))
         sizer_2.Add( self.statusLbl, 0, wx.ALIGN_CENTER_HORIZONTAL | wx.TOP, 10 )
 
         self.panel_1.SetSizer(sizer_1)

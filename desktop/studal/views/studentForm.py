@@ -102,7 +102,7 @@ class StudentForm(wx.Frame):
 
         sizer_11.Add((20, 20), 3, wx.EXPAND, 0)
 
-        self.exitBtn = wx.Button(self.panel_1, wx.ID_ANY, u"Kilépés")
+        self.exitBtn = wx.Button(self.panel_1, wx.ID_ANY, u"Bezárás")
         sizer_11.Add(self.exitBtn, 1, wx.ALIGN_CENTER_VERTICAL | wx.RIGHT, 8)
 
         self.panel_1.SetSizer(sizer_1)
