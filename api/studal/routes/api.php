@@ -29,7 +29,7 @@ Route::group([ "middleware" => [ "auth:sanctum" ]], function () {
 Route::post( "/register", [ AuthController::class, "register" ]);
 Route::post( "/login", [ AuthController::class, "login" ]);
 Route::post( "/logout", [ AuthController::class, "logout" ]);
-Route::get( "/students", [ StudentController::class, "index" ]);
+Route::get( "/students/groups/{id}", [ StudentController::class, "index" ]);
 Route::get( "/students/{id}", [ StudentController::class, "show" ]);
 Route::get( "/students/search/{name}", [ StudentController::class, "search" ]);
 

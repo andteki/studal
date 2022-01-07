@@ -4,6 +4,7 @@ from views.groupForm import GroupForm
 from views.loginForm import LoginForm
 from model.studalModel import Model
 from model.student import Student
+from model.comboItem import ComboItem
 import wx
 import sys
 
@@ -13,6 +14,7 @@ class Controller():
         
         self.loginmode = 0
         self.students = []
+        self.comboItems = []
         self.model = Model()
         self.mainFrm = MainForm( None, wx.ID_ANY, "" )
         # self.studentFrm = StudentForm( None, wx.ID_ANY, "" )
@@ -56,8 +58,21 @@ class Controller():
 
     def setComboBoxItems( self ):
         
-        comboItems = self.model.getComboItems()
-        self.mainFrm.groupCb.SetItems( comboItems )
+        content = self.model.getComboItems()
+        
+        for item in content:
+
+            cItem = ComboItem()
+            cItem.id = str( item[ "id" ])
+            cItem.group = item[ "classgroup" ]
+            self.comboItems.append( cItem )
+
+        cItems = []
+        for item in self.comboItems:
+
+            cItems.append( item.group )
+
+        self.mainFrm.groupCb.SetItems( cItems )
         self.mainFrm.groupCb.SetValue( "Csoportok" )
 
     def setTableProperties( self ):
@@ -85,7 +100,8 @@ class Controller():
 
     def getStudents( self, event ):
         
-        text = "students"
+        id = self.mainFrm.groupCb.GetSelection()
+        text = "students/groups/" + str( id + 1 )
         self.setTableProperties()
         content = self.model.getStudentsData( text )
 
@@ -150,7 +166,7 @@ class Controller():
             self.loginFrm.Show()
 
         else:
-            print( "hello", self.loginmode )
+            
             success = self.model.logout()
 
             if( success ):

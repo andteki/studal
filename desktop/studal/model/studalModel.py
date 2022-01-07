@@ -19,12 +19,22 @@ class Model:
 
     def getComboItems( self ):
 
-        comboItems = [ "Szoftver", "Ifra", "Logisztika", "Vám" ]
-        return comboItems
+        req = requests.get( self.endpoint + "groups" )
+        statusCode = req.status_code
+
+        if( statusCode == 200 ):
+
+            content = req.json()
+            
+            return content
+
+        else:
+            return False
         
 
     def getStudentsData( self, text ):
 
+        print( self.endpoint + text )
         req = requests.get( self.endpoint + text )
         statusCode = req.status_code
         
