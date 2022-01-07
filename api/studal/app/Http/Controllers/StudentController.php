@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller {
 
@@ -14,7 +15,12 @@ class StudentController extends Controller {
      */
     public function index() {
 
-        return Student::all();
+        // return Student::all();
+        $students = DB::table( "students" )
+            ->join( "classgroups", "students.classgroup_id", "=", "classgroups.id" )
+            ->get();
+
+        return $students;
     }
 
     /**

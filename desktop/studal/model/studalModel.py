@@ -27,20 +27,15 @@ class Model:
 
         req = requests.get( self.endpoint + text )
         statusCode = req.status_code
-        students = []
+        
         if( statusCode == 200 ):
             
             content = req.json()
-            for stu in content:
-                
-                student = []
-                student.append( stu[ "name" ])
-                student.append( stu[ "email"] )
-                student.append( stu[ "phone"] )
-                student.append( stu[ "borndate"] )
-                students.append( student )
-        
-        return students
+
+            return content
+
+        else:
+            return False
 
 
     def login( self, loginData ):
@@ -61,16 +56,28 @@ class Model:
 
 
     def logout( self ):
-
-        headers = { "Authorization" : "Bearer" + self.token }
+        
+        headers = { "Authorization" : "Bearer " + self.token }
         req = requests.post( self.endpoint + "logout", headers = headers )
         statusCode = req.status_code
-
+        
         if( statusCode == 200 ):
 
             self.token = ""
             return True
 
         else:
+            return False
 
+
+    def addStudent( self, studentData ):
+        
+        headers = { "Authorization" : "Bearer " + self.token }
+        req = requests.post( self.endpoint + "students", data = studentData, headers = headers )
+        statusCode = req.status_code
+        
+        if( statusCode == 201 ):
+            return True
+
+        else:
             return False
