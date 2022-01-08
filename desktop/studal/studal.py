@@ -1,12 +1,12 @@
 import wx
 
-from controllers.mainController import MainController
+from controllers.controller import Controller
 
 class StudalApp( wx.App ):
 
     def OnInit( self ):
         
-        MainController()
+        Controller()
         return True
 
 app = StudalApp( False )

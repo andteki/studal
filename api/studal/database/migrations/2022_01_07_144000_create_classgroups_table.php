@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStudentsTable extends Migration
+class CreateClassgroupsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,13 @@ class CreateStudentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('students', function (Blueprint $table) {
-            
+        Schema::create('classgroups', function (Blueprint $table) {
+
             $table->engine = "InnoDb";
             $table->charset = "utf8mb4";
             $table->collation = "utf8mb4_hungarian_ci";
             $table->id();
-            $table->string( "name" );
-            $table->string( "email" );
-            $table->string( "phone" );
-            $table->string( "borndate" );
-            $table->foreignId( "classgroup_id" );
+            $table->string( "classgroup" );
             $table->timestamps();
         });
     }
@@ -35,6 +31,6 @@ class CreateStudentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('students');
+        Schema::dropIfExists('classgroups');
     }
 }

@@ -1,5 +1,5 @@
 #from controllers.mainController import MainController
-from views.mainForm import MainForm
+from views.mainForma import MainForm
 import wx
 import sys
 
