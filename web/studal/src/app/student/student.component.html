@@ -1,6 +1,17 @@
 <nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
       <h1>Tanulók</h1>
+
+      <div class="d-flex"> 
+        <label style="margin-right: 5px;">Osztály </label>  
+        <select class="form-select" (change)="onChangeGroupSelect($event)" value="Válasszon osztályt">
+          <option value="" hidden></option>
+          <option *ngFor="let classgroup of classgroups" value="{{classgroup.id}}">
+            {{classgroup.classgroup}}
+          </option>
+        </select>
+      </div>
+
       <div class="d-flex">
         <button class="btn btn-success" 
         (click)="clickAddStudent()"
@@ -79,23 +90,26 @@
                   formControlName="borndate">
                 </div>
 
+                <input type="hidden" formControlName="classgroup_id" value="{{selectedClassgroup}}">
+
               </form>            
 
 
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          
           <button type="button" class="btn btn-primary" 
             *ngIf="showAdd"
             data-bs-dismiss="modal" (click)="addStudent()"
             id="addButton">Hozzáadás</button>
+
           <button type="button" class="btn btn-primary" 
             *ngIf="showUpdate"
             data-bs-dismiss="modal" (click)="updateStudent()"
             id="addButton">Módosítás</button>
-
-
-        </div>
+        </div>        
       </div>
+
     </div>
   </div>
