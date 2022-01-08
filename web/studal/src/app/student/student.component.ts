@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from '../shared/api.service';
 import { ApiclassService } from '../shared/apiclass.service';
 
@@ -16,7 +16,7 @@ export class StudentComponent implements OnInit {
   studentModelObj: StudentModel = new StudentModel();
   studentsData !: any;
   classgroups !: any;
-  selectedClassgroup !: number;
+  selectedClassgroup = new FormControl('');
 
   showAdd !: boolean;
   showUpdate !: boolean;
@@ -35,14 +35,22 @@ export class StudentComponent implements OnInit {
       borndate: [''],
       classgroup_id: ['']
     });
+
     this.getClassgroups();
+    let selected = localStorage.getItem('selectedClassgroup')
+
+    if (selected != null) {
+      this.selectedClassgroup.setValue(Number(selected));
+      this.getGroupStudent(this.selectedClassgroup.value);      
+      this.selectedClassgroup.setValue(selected)
+    }
   }
 
   onChangeGroupSelect(selected : any) {
-    let id = selected.target.value;
-    
+    let id = selected.target.value;    
     this.getGroupStudent(id);
-    this.selectedClassgroup = id;
+    this.selectedClassgroup.setValue(id);
+    localStorage.setItem('selectedClassgroup', id)
   }
 
   getClassgroups() {
@@ -58,14 +66,13 @@ export class StudentComponent implements OnInit {
     this.studentModelObj.email = this.studentForm.value.email;
     this.studentModelObj.phone = this.studentForm.value.phone;
     this.studentModelObj.borndate = this.studentForm.value.borndate;
-    this.studentModelObj.classgroup_id = this.selectedClassgroup;
+    this.studentModelObj.classgroup_id = this.selectedClassgroup.value;
 
     this.api.addStudent(this.studentModelObj)
     .subscribe( res => {
-      console.log(res);
-      alert('Tanuló hozzáadva');        
       this.studentForm.reset();
-      this.getGroupStudent(this.selectedClassgroup);
+      this.getGroupStudent(this.selectedClassgroup.value);
+      alert('Tanuló hozzáadva');
     },
       err => {
         alert('Hiba! A tanuló hozzáadása sikertelen!');
@@ -92,8 +99,8 @@ export class StudentComponent implements OnInit {
   deleteStudent(id: number) {
     this.api.deleteStudent(id)
     .subscribe(res => {
-      alert('A tanuló törölve');
-      this.getAllStudent();
+      this.getGroupStudent(this.selectedClassgroup.value);
+      alert('A tanuló törölve');      
     });
   }
 
@@ -121,7 +128,7 @@ export class StudentComponent implements OnInit {
     this.api.updateStudent(this.studentModelObj, this.studentModelObj.id)
     .subscribe( res => {
       this.studentForm.reset();
-      this.getGroupStudent(this.selectedClassgroup);
+      this.getGroupStudent(this.selectedClassgroup.value);
       alert('Módosítás megtörtént');
     })
   }

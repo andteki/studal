@@ -4,7 +4,7 @@
 
       <div class="d-flex"> 
         <label style="margin-right: 5px;">Osztály </label>  
-        <select class="form-select" (change)="onChangeGroupSelect($event)" value="Válasszon osztályt">
+        <select class="form-select" (change)="onChangeGroupSelect($event)" [formControl]="selectedClassgroup">
           <option value="" hidden></option>
           <option *ngFor="let classgroup of classgroups" value="{{classgroup.id}}">
             {{classgroup.classgroup}}
