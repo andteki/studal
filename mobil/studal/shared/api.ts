@@ -11,3 +11,14 @@ export function getStudents() {
         console.log(err);
     });
 }
+
+export function getClassgroup() {
+    let endpoint = 'classgroup';
+    let url = host + endpoint;
+    
+    return fetch(url)
+    .then(res => res.json())
+    .catch(err => {
+        console.log(err);
+    });
+}
