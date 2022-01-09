@@ -41,6 +41,7 @@ export class AuthService {
     }
     let data:any = localStorage.getItem('currentUser');
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('selectedClassgroup');
     let currentUser = JSON.parse(data);
     let token = currentUser.token;    
     let headerObj = new HttpHeaders({
@@ -58,6 +59,7 @@ export class AuthService {
       this.router.navigate(['login']);
     })
   }
+
   isLoggedIn() {
     if (localStorage.getItem('currentUser') === null) {
       return false;

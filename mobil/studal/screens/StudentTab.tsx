@@ -3,40 +3,61 @@ import { FlatList, StyleSheet, TouchableHighlight } from 'react-native';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
-import { getStudents } from '../shared/api';
+import { getClassgroups, getStudents } from '../shared/api';
 import { useEffect, useState } from 'react';
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+  const [classgroups, setClassgroups] = useState([]);
   const [students, setStudents] = useState([]);
+  const [selectedClassgroup, setSelectedClassgroup] = useState();
+  const [selectedName, setSelectedName] = useState();
 
-  const getStuds = () => {
-    let prom = getStudents();    
+  const getStuds = (id: number) => {
+    let prom = getStudents(id);    
     prom.then(res => {
-        setStudents(res)
+        setStudents(res)        
+    })
+  }
+
+  const getClass = () => {
+    let prom = getClassgroups()
+    .then(res => {
+      setClassgroups(res)
     })
   }
 
   useEffect(()=> {
-    getStuds();
+    getClass();
   }, [])
 
-  const onGetButton = () => {
-    getStuds();
+  const onClickGroupItem = ( item: any ) => {
+    console.log( item.id )
+    console.log( item.classgroup)
+    setSelectedClassgroup(item.id)
+    getStuds(item.id)
+    setSelectedName(item.classgroup)
   }
   
   return (
     
     <View style={styles.container}>
-     
-      <Text style={styles.title}>Tanulók</Text>
-      <TouchableHighlight
-        style={styles.getButton}
-        onPress={onGetButton}
-      >
-        <Text style={styles.getButtonText}>Tölt</Text>
-      </TouchableHighlight>
+
+
+      <View style={styles.groupList}>
+        <FlatList 
+        data={classgroups}        
+        renderItem={ ({item})=>(
+          <Text style={styles.item} onPress={() => onClickGroupItem(item)}>{item.classgroup}</Text>
+        )}        
+        />        
+      </View>
 
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+
+
+      <View style={styles.selectedNameView}>
+      <Text style={styles.selectedName}>{selectedName}</Text>
+      </View>
 
       <View style={styles.studList}>
         <FlatList 
@@ -46,9 +67,6 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
         )}
         />
       </View>
-
-
-      
      
     </View>
   );
@@ -74,13 +92,19 @@ const styles = StyleSheet.create({
     backgroundColor: 'navy',
     color: 'white',
     padding: 10,
-    margin: 8 ,
+    margin: 8,
   },
   studList: {
     flex: 1,
     width: '100%',
     flexDirection: 'column',
     backgroundColor: 'orange',
+  },
+  groupList: {
+
+    width: '100%',
+    flexDirection: 'column',
+    backgroundColor: 'skyeblue',
   },
   getButton: {
     backgroundColor: 'blue',
@@ -93,5 +117,17 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     fontSize: 22,
-  }  
+  },
+  selectedNameView: {
+
+    height: 36,
+    backgroundColor: 'orange',
+    width: '100%',
+  },
+  selectedName: {
+    textAlign: 'center',
+    fontSize: 32,
+    color: 'black',
+
+  }
 });
