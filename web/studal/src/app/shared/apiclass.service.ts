@@ -73,7 +73,7 @@ export class ApiclassService {
       headers: headerObj
     };
 
-    let endpoint = 'gorups';
+    let endpoint = 'groups';
     return this.http.put<any>(this.host + endpoint + '/' + id, classgroup, httpOption)
     .pipe(map( res => {
       return res;
