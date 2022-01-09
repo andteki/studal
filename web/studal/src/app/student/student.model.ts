@@ -4,4 +4,5 @@ export class StudentModel {
     email: string = '';
     phone: string = '';
     borndate: string = '';
+    classgroup_id: number = 0;
 }

@@ -1,1 +1,79 @@
-<p>class works!</p>
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <h1>Osztályok</h1>
+      <div class="d-flex">
+        <button class="btn btn-success" 
+        (click)="clickAddClassgroup()"
+        data-bs-toggle="modal" 
+        data-bs-target="#exampleModal">Hozzáadás</button>
+      </div>
+    </div>
+</nav>
+  
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Az</th>
+            <th>Név</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let classgroup of classgroupsData">
+            <td>{{classgroup.id}}</td>
+            <td>{{classgroup.classgroup}}</td>
+            <td>
+                <button 
+                type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                (click)="onEdit(classgroup)"
+                class="btn btn-info mr-2">Edit</button>
+
+                <button 
+                (click)="deleteClassgroup(classgroup.id)"
+                class="btn btn-danger max-3">Delete</button>
+            </td>            
+        </tr>
+    </tbody>
+</table>
+
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Tanuló hozzáadása</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+        </div>
+        <div class="modal-body">
+
+
+            <form [formGroup]="classgroupForm">
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Név</label>
+                  <input type="text" class="form-control" id="exampleInputPassword1"
+                  formControlName="name">
+                </div>
+
+              </form>            
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" 
+            *ngIf="showAdd"
+            data-bs-dismiss="modal" (click)="addClassgroup()"
+            id="addButton">Hozzáadás</button>
+          <button type="button" class="btn btn-primary" 
+            *ngIf="showUpdate"
+            data-bs-dismiss="modal" (click)="updateClassgroup()"
+            id="addButton">Módosítás</button>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
