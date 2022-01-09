@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginForm !: FormGroup;
+  
 
   constructor(
     private formBuilder: FormBuilder,
@@ -22,8 +23,10 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       name: [''],
       password: ['']
-    })    
+    })
+        
   }
+
   login() { 
     let user = this.loginForm.value.name;
     let pass = this.loginForm.value.password;
@@ -40,6 +43,6 @@ export class LoginComponent implements OnInit {
         alert('A belépés sikertelen!')
       }
     })
-
+    
   }
 }

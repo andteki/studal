@@ -1,10 +1,8 @@
 TODO: A "Kilépés" gomb csak akkor látszodjon, ha be vagyunk lépve
 TODO: Ha beléptünk, akkor ne látszodjon a belépés menüpont
-TODO: A tanulónak jelenjenek meg az osztályai, lehessen választani
-TODO: Az osztályokat lehessen kezelni
 TODO: Az osztálykezelés le kell védeni.
 TODO: A tanulóknál gond van az alapértelmezett
 osztállyal. Ha nincs kiválasztva nem kéne
 a hozzáadás gombnak működnie.
 TODO: Tanulók módosítás nem működik.
-
+TODO: Ha a szerver nem érhető el, a login felület tájékoztasson.

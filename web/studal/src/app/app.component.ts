@@ -7,6 +7,7 @@ import { AuthService } from './shared/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
   title = 'studal';
   
   constructor(private auth: AuthService) {}
@@ -14,5 +15,9 @@ export class AppComponent {
   logout() {
     this.auth.logout();
     console.log('Kilépés itt...')
+  }
+  
+  showLogout() {
+    console.log('valami')
   }
 }
