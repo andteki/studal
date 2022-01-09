@@ -1,0 +1,2 @@
+# Studal
+## Minta alkalmazások
