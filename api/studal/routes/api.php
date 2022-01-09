@@ -23,6 +23,7 @@ Route::group([ "middleware" => [ "auth:sanctum" ]], function () {
     Route::delete( "/students/{id}", [ StudentController::class, "destroy" ]);
 
     Route::post( "/groups", [ ClassGroupController::class, "store" ]);
+    Route::put( "/groups/{id}", [ ClassGroupController::class, "update" ]);
     Route::delete( "/groups/{id}", [ ClassGroupController::class, "destroy" ]);
 });
 
