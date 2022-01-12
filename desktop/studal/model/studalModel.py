@@ -34,7 +34,6 @@ class Model:
 
     def getStudentsData( self, text ):
 
-        print( self.endpoint + text )
         req = requests.get( self.endpoint + text )
         statusCode = req.status_code
         
@@ -81,7 +80,7 @@ class Model:
 
 
     def addStudent( self, studentData ):
-        
+        print( studentData )
         headers = { "Authorization" : "Bearer " + self.token }
         req = requests.post( self.endpoint + "students", data = studentData, headers = headers )
         statusCode = req.status_code

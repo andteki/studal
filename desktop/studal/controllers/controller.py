@@ -92,19 +92,15 @@ class Controller():
 
         self.loginFrm.userNameTf.SetValue( "" )
         self.loginFrm.passwordTf.SetValue( "" )
-        self.studentFrm.nameTf.SetValue( "" )
-        self.studentFrm.emailTf.SetValue( "" )
-        self.studentFrm.phoneTf.SetValue( "" )
-        self.studentFrm.bornTf.SetValue( "" )
-        self.groupFrm.groupTf.SetValue( "" )
+        # self.studentFrm.nameTf.SetValue( "" )
+        # self.studentFrm.emailTf.SetValue( "" )
+        # self.studentFrm.phoneTf.SetValue( "" )
+        # self.studentFrm.bornTf.SetValue( "" )
+        # self.groupFrm.groupTf.SetValue( "" )
 
-    def getStudents( self, event ):
-        
-        id = self.mainFrm.groupCb.GetSelection()
-        text = "students/groups/" + str( id + 1 )
-        self.setTableProperties()
-        content = self.model.getStudentsData( text )
+    def convertResponseToList( self, content ):
 
+        self.students = []
         for stu in content:
             student = Student()
             student.id = str( stu[ "id" ])
@@ -114,7 +110,19 @@ class Controller():
             student.borndate = stu[ "borndate" ]
             
             self.students.append( student )
+
+    def getStudents( self, event ):
         
+        comboId = 0
+        for combo in self.comboItems:
+            if( combo.group == self.mainFrm.groupCb.GetValue() ):
+                comboId = combo.id
+
+        text = "students/groups/" + comboId
+        self.setTableProperties()
+        content = self.model.getStudentsData( text )
+        self.convertResponseToList( content )
+
         row = 0
         for student in self.students:
             
@@ -125,40 +133,25 @@ class Controller():
             self.mainFrm.studentTbl.AppendRows()
             row += 1
 
-        # for i in range ( 0, len( students )):
-        #     #j = 0
-        #     if( i < len( students ) ):
-        #             self.mainFrm.studentTbl.AppendRows()
-        #     for j in range( 0, len( students[ i ])):
-        #         self.mainFrm.studentTbl.SetCellValue( i, j, students[ i ][ j ])
-                
-
-
+    
     def getSearchStudent( self, event ):
         
         text = "students/search/" + self.mainFrm.searchTf.GetValue()
         self.setTableProperties()
-        students = self.model.getStudentsData( text )
+        content = self.model.getStudentsData( text )
         self.mainFrm.studentTbl.ClearGrid()
 
-        # row = 0
-        # for student in students:
+        row = 0
+        for student in self.students:
             
-        #     self.mainFrm.studentTbl.SetCellValue( row, 0, student.id )
-        #     self.mainFrm.studentTbl.SetCellValue( row, 1, student.name )
-        #     self.mainFrm.studentTbl.SetCellValue( row, 2, student.email )
-        #     self.mainFrm.studentTbl.SetCellValue( row, 3, student.phone )
-        #     self.mainFrm.studentTbl.SetCellValue( row, 4, student.borndate )
-        #     self.mainFrm.studentTbl.AppendRows()
-        #     row += 1
+            self.mainFrm.studentTbl.SetCellValue( row, 0, student.name )
+            self.mainFrm.studentTbl.SetCellValue( row, 1, student.email )
+            self.mainFrm.studentTbl.SetCellValue( row, 2, student.phone )
+            self.mainFrm.studentTbl.SetCellValue( row, 3, student.borndate )
+            self.mainFrm.studentTbl.AppendRows()
+            row += 1
 
-        for i in range ( 0, len( students )):
-            j = 0
-            if( i > j ):
-                self.mainFrm.studentTbl.AppendRows()
-            for j in range( len( students[ i ])):
-                self.mainFrm.studentTbl.SetCellValue( i, j, students[ i ][ j ])
-
+    
     def loginLogout( self, event ):
         
         if( self.loginmode == 0 ):
@@ -197,7 +190,7 @@ class Controller():
                 self.mainFrm.loginLogoutBtn.SetLabel( "Kijelentkezés" )
                 self.loginmode = 1
                 self.disposeLoginForm( event )
-                self.clearTextFields()
+                self.clearTextFields( event )
 
             else:
 
@@ -234,8 +227,27 @@ class Controller():
     #     else:
     #         self.mainFrm.statusLbl.SetLabel( "Kiírási hiba" )
 
-    def saveStudent( self ):
-        pass
+    def saveStudent( self, event  ):
+
+        studentData = {}
+        comboId = 0
+        for combo in self.comboItems:
+            if( combo.group == self.mainFrm.groupCb.GetValue() ):
+                comboId = combo.id
+
+        row = self.mainFrm.studentTbl.GetSelectedRows()
+        studentData[ "name" ] = self.mainFrm.studentTbl.GetCellValue( row[ 0 ], 0 )
+        studentData[ "email" ] = self.mainFrm.studentTbl.GetCellValue( row[ 0 ], 1 )
+        studentData[ "phone" ] = self.mainFrm.studentTbl.GetCellValue( row[ 0 ], 2 )
+        studentData[ "borndate" ] = self.mainFrm.studentTbl.GetCellValue( row[ 0 ], 3 )
+        studentData[ "classgroup_id" ] = comboId
+        
+        success = self.model.addStudent( studentData )
+        if( success ):
+            self.mainFrm.statusLbl.SetLabel( "Sikeres kiírás ")
+
+        else:
+            self.mainFrm.statusLbl.SetLabel( "Írási hiba" )
 
     def modifyStudent( self ):
         pass
