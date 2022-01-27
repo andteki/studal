@@ -1,4 +1,5 @@
 # Studal
+
 ## Mintaalkalmazások
 
 - REST API

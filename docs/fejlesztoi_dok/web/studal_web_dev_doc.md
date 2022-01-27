@@ -1,15 +1,36 @@
 # Studal
-# Fejlesztői dokumentáció
-### 2021
 
-### Minta
+## Fejlesztői dokumentáció - web
+
+## 2021, 2022
+
+## Minta
+
+## Fejlesztői nézet
+
+Lépjünk be a studal/web/studal/ könyvtárba:
+
+```bash
+cd studal/web/studal
+```
+
+Most le kell töltenünk a függőségeket. Ez két paranccsal lehetséges, az npm és a yarn. Kettő közül használjuk a yarn parancsot:
+
+```bash
+yarn install
+```
+
+A webes felület indítása:
+
+```bash
+ng serve -o
+```
 
 ## Felépítés
 
-
 ### Könyvtárszerszerkezet
 
-```
+```txt
 studal/
   |-node_modules/
   |-src/
@@ -38,8 +59,7 @@ studal/
 
 ```
 
-A webes felület egy SPA alkalmazás Angular 
+A webes felület egy SPA alkalmazás Angular
 keretrendszerrel összeállítva.
-
-Az app komponens tartalmazza a menüt. 
+Az app komponens tartalmazza a menüt.
 
