@@ -91,6 +91,3 @@ adatait.
 
 Mindkét függvény a host globális változóból helyettesíti be
 a használandó szerver útvonalát, és függvényen belül beállítja az elérendő végpontot.  
-
-
-
