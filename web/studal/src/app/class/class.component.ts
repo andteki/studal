@@ -71,6 +71,7 @@ export class ClassComponent implements OnInit {
     this.classgroupForm.controls['name'].setValue(classgroup.classgroup);
 
   }
+  
   updateClassgroup() {
     this.classgroupModelObj.classgroup = this.classgroupForm.value.name;
     
