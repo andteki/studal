@@ -19,3 +19,4 @@ Ez a dokumentáció a telefonos alkalmazástról szól. A telefonos alkalmazás 
 A REST API és az adatbázis telepítése az api felhasználói dokumentációban található.
 
 A telefonos alkalmazás telepítéséhez le kell tölteni az Androidos csomagot a telefonra, majd meg kell nyitni. A telepítés automatikusan végrebegy.
+
